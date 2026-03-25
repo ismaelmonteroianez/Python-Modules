@@ -9,6 +9,9 @@ class Plant:
     def show(self) -> None:
         print(f"{self.name}: {self.height:.1f}cm, {self.age} days old")
 
+    def advance_age(self) -> None:
+        self.age += 1
+
     def grow(self) -> None:
         self.height = self.height + self.growth
 

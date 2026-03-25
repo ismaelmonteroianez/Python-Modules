@@ -9,6 +9,12 @@ class Plant:
     def show(self) -> None:
         print(f"{self.name}: {self._height:.1f}cm, {self._age} days old")
 
+    def advance_age(self) -> None:
+        self._age += 1
+
+    def grow(self) -> None:
+        self._height = self._height + self.growth
+
     def get_age(self) -> int:
         return self._age
 
@@ -20,7 +26,7 @@ class Plant:
             self._age = new_age
             print(f"Age updated: {self._age} days")
 
-    def get_height(self) -> int:
+    def get_height(self) -> float:
         return self._height
 
     def set_height(self, new_height: int) -> None:
@@ -38,7 +44,6 @@ if __name__ == "__main__":
     print("Plant created: ", end="")
     plant1.show()
     print()
-    new_age = plant1.get_age()
     new_age = 20
     new_height = 30
     plant1.set_age(new_age)
