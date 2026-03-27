@@ -1,5 +1,5 @@
 class Plant:
-    def __init__(self, name: str, height: int,
+    def __init__(self, name: str, height: float,
                  age: int, growth: float) -> None:
         self.name = name
         self._height = height
@@ -44,9 +44,6 @@ class Flower(Plant):
         super().__init__(name, height, age, growth)
         self.color = color
         self.bloomed = False
-        self.show()
-        self.bloom()
-        self.show()
 
     def show(self) -> None:
         super().show()
@@ -66,8 +63,6 @@ class Tree(Plant):
                  age: int, growth: float, trunk_diameter: float) -> None:
         super().__init__(name, height, age, growth)
         self.trunk_diameter = trunk_diameter
-        self.show()
-        self.produce_shade()
 
     def show(self) -> None:
         super().show()
@@ -85,7 +80,6 @@ class Vegetable(Plant):
         super().__init__(name, height, age, growth)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
-        self.show()
 
     def show(self) -> None:
         super().show()
@@ -102,12 +96,18 @@ if __name__ == "__main__":
     print("=== Garden Plant Types ===")
     print("=== Flower")
     plant1 = Flower("Rose", 15, 10, 0.8, "red")
+    plant1.show()
+    plant1.bloom()
+    plant1.show()
     print()
     print("=== Tree")
     plant2 = Tree("Oak", 200, 365, 0.2, 5.0)
+    plant2.show()
+    plant2.produce_shade()
     print()
     print("=== Vegetable")
     plant3 = Vegetable("Tomato", 5, 10, 2.1, "April", 0)
+    plant3.show()
     number_days = 20
     print(f"[make tomato grow and age for {number_days} days]")
     for day in range(1, number_days + 1):

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def ft_garden_intro(name: str, height: int, age: int) -> None:
+def ft_garden_intro(name: str, height: float, age: int) -> None:
     print("=== Welcome to My Garden ===")
     print(f"Plant: {name}")
     print(f"Height: {height}cm")
