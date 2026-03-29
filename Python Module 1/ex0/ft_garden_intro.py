@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 def ft_garden_intro(name: str, height: float, age: int) -> None:
     print("=== Welcome to My Garden ===")
     print(f"Plant: {name}")

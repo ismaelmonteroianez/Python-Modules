@@ -1,8 +1,8 @@
 def input_temperature(temp_str: str) -> int:
-    if  int(temp_str) <= 0:
-        raise ValueError(f"Caught input_temperature error: {temp_str}°C is too cold for plants (min 0°C)")
+    if int(temp_str) <= 0:
+        raise ValueError(f"{temp_str}°C is too cold for plants (min 0°C)")
     elif int(temp_str) >= 40:
-        raise ValueError(f"Caught input_temperature error: {temp_str}°C is too hot for plants (max 40°C)")
+        raise ValueError(f"{temp_str}°C is too hot for plants (max 40°C)")
     else:
         return int(temp_str)
 
@@ -19,7 +19,7 @@ def test_temperature() -> None:
         result = input_temperature(ok_temp)
         print(f"Temperature is now {result}°C\n")
     except ValueError as e:
-            print(f"Caught input_temperature error: {e}\n")
+        print(f"Caught input_temperature error: {e}\n")
     try:
         print(f"Input data is '{not_ok_temp}'")
         result = input_temperature(not_ok_temp)
