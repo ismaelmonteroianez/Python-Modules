@@ -1,19 +1,18 @@
 class Plant:
     def __init__(self, name: str, height: float,
-                 age: int, growth: float) -> None:
+                 age: int) -> None:
         self.name = name
         self._height = height
         self._age = age
-        self.growth = growth
 
     def show(self) -> None:
         print(f"{self.name}: {self._height:.1f}cm, {self._age} days old")
 
-    def advance_age(self) -> None:
-        self._age += 1
+    def advance_age(self, days: int = 1) -> None:
+        self._age += days
 
-    def grow(self) -> None:
-        self._height = self._height + self.growth
+    def grow(self, growth: float = 0.8) -> None:
+        self._height = self._height + growth
 
     def get_age(self) -> int:
         return self._age
@@ -39,15 +38,20 @@ class Plant:
 
 
 if __name__ == "__main__":
-    plant1 = Plant("Rose", 15, 10, 0.8)
+    plant1 = Plant("Rose", 15, 10)
     print("=== Garden Security System ===")
     print("Plant created: ", end="")
     plant1.show()
     print()
-    new_age = 20
-    new_height = 30
-    plant1.set_age(new_age)
+    new_age = 30
+    new_height = 25
     plant1.set_height(new_height)
+    plant1.set_age(new_age)
+    print()
+    new_age = -3
+    new_height = -5
+    plant1.set_height(new_height)
+    plant1.set_age(new_age)
     print()
     print("Current state: ", end="")
     plant1.show()

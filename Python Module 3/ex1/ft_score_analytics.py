@@ -11,4 +11,11 @@ def	main() -> None:
 			print(f"Invalid parameter: '{sys.argv[i]}'")
 		
 if __name__ == "__main__":
-	main()
+	#main()
+	lists = ["1", "2", "3", "hoal"]
+	try:
+		result = [int(i) for i in lists]
+		print(result)
+	except ValueError as e:
+		srr = e.args[0]
+		print(f"value error {srr[40:]}")

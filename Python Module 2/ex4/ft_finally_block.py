@@ -28,28 +28,29 @@ def water_plant(plant_name: str) -> None:
         raise PlantError(f"Invalid plant name to water: '{plant_name}'")
 
 
-def test_watering_system() -> None:
+def test_watering_system(plants: list[str]) -> None:
     print("Opening watering system")
-    try: 
-        water_plant("Tomato")
-        water_plant("Lettuce")
-        water_plant("Carrots")
-    except PlantError as e:
-        print(f"Caught PlantError: {e}")
-        print(".. ending tests and returning to main")
-        return
-    finally:
-        print("Closing watering system\n")
+    for i in plants:
+        try:
+            water_plant("Tomato")
+            water_plant("Lettuce")
+            water_plant("Carrots")
+        except PlantError as e:
+            print(f"Caught PlantError: {e}")
+            print(".. ending tests and returning to main")
+            return
+        finally:
+            print("Closing watering system\n")
 
 
 def main():
     print("=== Garden Watering System ===\n")
     print("Testing valid plants...")
-    valid_plants = ["Tomato", ...]
-    test_watering_system()
+    valid_plants = ["Tomato", "Lettuce", "Carrots"]
+    test_watering_system(valid_plants)
     print("Testing invalid plants...")
-    invalid_plants = ["tomato", ...]
-    test_watering_system()
+    invalid_plants = ["Tomato", "lettuce", "Carrots"]
+    test_watering_system(invalid_plants)
 
 
 if __name__ == "__main__":
