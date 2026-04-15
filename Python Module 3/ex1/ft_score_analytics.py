@@ -1,21 +1,37 @@
 import sys
 
 def	main() -> None:
+	scores = []
 	print("=== Player Score Analytics ===")
-	if len(sys.argv) == 1:
-		print("No scores provided.")
+	valid_arguments = False
 	for i in range(1, len(sys.argv)):
 		try:
-			float(sys.argv[i])
+			number = int(sys.argv[i])
+			scores = scores + [number]
+			valid_arguments = True
 		except ValueError:
 			print(f"Invalid parameter: '{sys.argv[i]}'")
-		
+	if not valid_arguments:
+		print("No scores provided. Usage: python3 ft_score_analytics.py <score1> <score2> ...")
+		return
+	print(f"Scores processed: {scores}")
+	total_players = len(scores)
+	print(f"Total players: {total_players}")
+	total_score = sum(scores)
+	print(f"Total score: {total_score}")
+	print(f"Average score: {sum(scores) / len(scores)}")
+	max_score = max(scores)
+	print(f"High score: {max_score}")
+	print(f"Low score: {min(scores)}")
+	print(f"Score range: {max(scores) - min(scores)}")
+
+
 if __name__ == "__main__":
-	#main()
-	lists = ["1", "2", "3", "hoal"]
-	try:
-		result = [int(i) for i in lists]
-		print(result)
-	except ValueError as e:
-		srr = e.args[0]
-		print(f"value error {srr[40:]}")
+	main()
+	#lists = ["1", "2", "3", "hoal"]
+	#try:
+	#	result = [int(i) for i in lists]
+	#	print(result)
+	#except ValueError as e:
+	#	srr = e.args[0]
+	#	print(f"value error {srr[40:]}")

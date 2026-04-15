@@ -11,5 +11,6 @@ def main() -> None:
 		print("No arguments provided!")
 	print(f"Total arguments: {len(sys.argv)}")
 
+
 if __name__ == "__main__":
 	main()
