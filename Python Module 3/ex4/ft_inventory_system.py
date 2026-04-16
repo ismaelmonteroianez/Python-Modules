@@ -1,5 +1,6 @@
 import sys
 
+
 def main() -> None:
     inventory = {}
     for args in sys.argv[1:]:
@@ -27,7 +28,7 @@ def main() -> None:
                 inventory[item_name] = quantity
         except ValueError as e:
             print(f"Quantity error for '{item_name}': {e}")
-       
+
     print(f"Got inventory: {inventory}")
     item_list = list(dict.keys(inventory))
     print(f"Item list: {item_list}")
@@ -48,7 +49,7 @@ def main() -> None:
             min_key = item_name
     print(f"Item most abundant: {max_key} with quantity {max_value}")
     print(f"Item least abundant: {min_key} with quantity {min_value}")
-    inventory.update({"magic_item":1})
+    inventory.update({"magic_item": 1})
     print(f"Updated inventory: {inventory}")
 
 

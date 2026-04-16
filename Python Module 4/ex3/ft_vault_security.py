@@ -1,17 +1,20 @@
-def secure_archive(file: str, choice: str = "w", content: str = "") -> tuple[bool, str]:
+def secure_archive(file: str, choice: str = "r",
+                   content: str = "") -> tuple[bool, str]:
     try:
-        with open(file, choice) as f:
-            if choice == "w":
+        if choice == "w":
+            with open(file, "w") as f:
                 f.write(content)
-                return (True, "'Content successfully written to file'")
-            if choice == "r":
+            return (True, "Content successfully written to file")
+        elif choice == "r":
+            with open(file, "r") as f:
                 content = f.read()
-                return (True, content)
+            return (True, content)
+        return (False, "Invalid mode: use 'r' or 'w'")
     except FileNotFoundError as e:
         return (False, str(e))
     except PermissionError as e:
         return (False, str(e))
-    
+
 
 if __name__ == "__main__":
     print("=== Cyber Archives Security ===")
@@ -19,12 +22,12 @@ if __name__ == "__main__":
     print("Using 'secure_archive' to read from a nonexistent file:")
     file = "/not/existing/file"
     result = secure_archive(file, "r", "")
-    print (result)
+    print(result)
     print()
     print("Using 'secure_archive' to read from a regular file:")
     file = "/etc/master.passwd"
-    result = secure_archive(file,"r", "")
-    print (result)
+    result = secure_archive(file, "r", "")
+    print(result)
     print()
     print("Using 'secure_archive' to read from a regular file:")
     file = "ancient_fragment.txt"
@@ -32,4 +35,4 @@ if __name__ == "__main__":
     print(result)
     print()
     print("Using 'secure_archive' to write previous content to a new file:")
-    result = secure_archive(file, "w", "")
+    result = secure_archive(file, "w", "This is a test in the archives")

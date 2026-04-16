@@ -1,6 +1,7 @@
 import sys
 import typing
 
+
 def main() -> None:
     if len(sys.argv) != 2:
         print("Usage: ft_ancient_text.py <file>")
@@ -27,11 +28,11 @@ def main() -> None:
         print("Transform data:")
         print("---")
         print()
-        print(new_content, end= "")
+        print(new_content, end="")
         print("\n")
         print("---")
         print("Enter new file name (or empty): ", flush=True, end="")
-        new_archive : str = sys.stdin.readline()
+        new_archive: str = sys.stdin.readline()
         new_archive_stripped = new_archive[:len(new_archive) - 1]
         new_archive = new_archive_stripped
         if new_archive == "":
@@ -43,9 +44,11 @@ def main() -> None:
             print(f"Data saved in file '{new_archive}'.")
             new_file.close()
     except FileNotFoundError as e:
-        print(f"[STDERR] Error opening file '{sys.argv[1]}': {e}", file=sys.stderr)
+        print(f"[STDERR] Error opening file"
+              f"'{sys.argv[1]}': {e}", file=sys.stderr)
     except PermissionError as e:
-        print(f"[STDERR] Error opening file '{sys.argv[1]}': {e}", file=sys.stderr)
+        print(f"[STDERR] Error opening file"
+              f"'{sys.argv[1]}': {e}", file=sys.stderr)
 
 
 if __name__ == "__main__":

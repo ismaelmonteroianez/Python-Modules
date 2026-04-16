@@ -1,15 +1,15 @@
-class GardenError(Exception):  
-    def __init__(self, message="Unknown garden error") -> None:
+class GardenError(Exception):
+    def __init__(self, message: str = "Unknown garden error") -> None:
         super().__init__(message)
 
 
 class PlantError(GardenError):
-    def __init__(self, message="Unknown plant error") -> None:
+    def __init__(self, message: str = "Unknown plant error") -> None:
         super().__init__(message)
 
 
 class WaterError(GardenError):
-    def __init__(self, message= "Unknown water error") -> None:
+    def __init__(self, message: str = "Unknown water error") -> None:
         super().__init__(message)
 
 
@@ -18,7 +18,7 @@ def check_plant(plant_name: str) -> None:
 
 
 def check_water(water: int) -> None:
-    raise WaterError (f"Not enough water in the tank!")
+    raise WaterError("Not enough water in the tank!")
 
 
 def water_plant(plant_name: str) -> None:
@@ -43,7 +43,7 @@ def test_watering_system(plants: list[str]) -> None:
             print("Closing watering system\n")
 
 
-def main():
+def main() -> None:
     print("=== Garden Watering System ===\n")
     print("Testing valid plants...")
     valid_plants = ["Tomato", "Lettuce", "Carrots"]
@@ -54,4 +54,4 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
+    main()

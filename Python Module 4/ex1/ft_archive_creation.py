@@ -1,6 +1,7 @@
 import sys
 import typing
 
+
 def main() -> None:
     if len(sys.argv) != 2:
         print("Usage: ft_ancient_text.py <file>")
@@ -27,10 +28,10 @@ def main() -> None:
         print("Transform data:")
         print("---")
         print()
-        print(new_content, end= "")
+        print(new_content, end="")
         print("\n")
         print("---")
-        new_archive : str = input("Enter new file name (or empty):")
+        new_archive: str = input("Enter new file name (or empty):")
         if new_archive == "":
             print("Not saving data.")
         else:

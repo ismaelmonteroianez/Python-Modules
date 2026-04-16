@@ -1,15 +1,15 @@
 class GardenError(Exception):
-    def __init__(self, message="Unknown garden error") -> None:
+    def __init__(self, message: str = "Unknown garden error") -> None:
         super().__init__(message)
 
 
 class PlantError(GardenError):
-    def __init__(self, message="Unknown plant error") -> None:
+    def __init__(self, message: str = "Unknown plant error") -> None:
         super().__init__(message)
 
 
 class WaterError(GardenError):
-    def __init__(self, message="Unknown water error") -> None:
+    def __init__(self, message: str = "Unknown water error") -> None:
         super().__init__(message)
 
 
@@ -21,7 +21,7 @@ def check_water(water: int) -> None:
     raise WaterError("Not enough water in the tank!")
 
 
-def main():
+def main() -> None:
     print("=== Custom Garden Errors Demo ===\n")
     print("Testing PlantError...")
     try:
