@@ -33,17 +33,31 @@ def main() -> None:
         )
     print(f"All distinct achievements: {all_achievements}\n")
     print(f"Common achievements: {common_achievements}\n")
-    print(f"Only Alice has: {alice_achievements.difference(bob_achievements, charlie_achievements, dylan_achievements)}")
-    print(f"Only Bob has: {bob_achievements.difference(alice_achievements, charlie_achievements, dylan_achievements)}")
-    print(f"Only Charlie has: {charlie_achievements.difference(alice_achievements, bob_achievements, dylan_achievements)}")
-    print(f"Only Dylan has: {dylan_achievements.difference(alice_achievements, bob_achievements, charlie_achievements)}\n")
-    achievement_list = {'Crafting Genius', 'Strategist', 'World Savior', 'Speed Runner', 'Survivor',
-                            'Master Explorer', 'Treasure Hunter', 'Unstoppable', 'First Steps', 
-                            'Collector Supreme', 'Untouchable', 'Sharp Mind', 'Boss Slayer', 'Hidden Path Finder'}
-    print(f"Alice is missing: {achievement_list.difference(alice_achievements)}")
+    only_alice = alice_achievements.difference(
+        bob_achievements, charlie_achievements, dylan_achievements)
+    print(f"Only Alice has: {only_alice}")
+    only_bob = bob_achievements.difference(
+        alice_achievements, charlie_achievements, dylan_achievements)
+    print(f"Only Bob has: {only_bob}")
+    only_charlie = charlie_achievements.difference(
+        alice_achievements, bob_achievements, dylan_achievements)
+    print(f"Only Charlie has: {only_charlie}")
+    only_dylan = dylan_achievements.difference(
+        alice_achievements, bob_achievements, charlie_achievements)
+    print(f"Only Dylan has: {only_dylan}\n")
+    achievement_list = {'Crafting Genius', 'Strategist',
+                        'World Savior', 'Speed Runner', 'Survivor',
+                        'Master Explorer', 'Treasure Hunter',
+                        'Unstoppable', 'First Steps',
+                        'Collector Supreme', 'Untouchable', 'Sharp Mind',
+                        'Boss Slayer', 'Hidden Path Finder'}
+    print("Alice is missing: "
+          f"{achievement_list.difference(alice_achievements)}")
     print(f"Bob is missing: {achievement_list.difference(bob_achievements)}")
-    print(f"Charlie is missing: {achievement_list.difference(charlie_achievements)}")
-    print(f"Dylan is missing: {achievement_list.difference(dylan_achievements)}")
+    print("Charlie is missing:"
+          f"{achievement_list.difference(charlie_achievements)}")
+    print("Dylan is missing:"
+          f"{achievement_list.difference(dylan_achievements)}")
 
 
 if __name__ == "__main__":

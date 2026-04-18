@@ -2,37 +2,28 @@ import sys
 
 
 def main() -> None:
+    print("=== Inventory System Analysis ===")
     inventory = {}
     for args in sys.argv[1:]:
-        accumulattor = ""
-        accumulattor2 = ""
-        item_name = ""
-        colon = False
-        for x in args:
-            if x == ':':
-                colon = True
+        item_data = args.split(':')
+        if len(item_data) != 2:
+                print(f"Error - invalid parameter '{args}'")
                 continue
-            elif colon is False:
-                accumulattor = accumulattor + x
-            if colon is True:
-                accumulattor2 = accumulattor2 + x
-        try:
-            item_name = accumulattor
-            if colon is False:
-                print(f"Error - invalid parameter '{item_name}'")
-                continue
-            quantity = int(accumulattor2)
-            if item_name in inventory:
+        item_name = item_data[0]
+        if item_name in inventory:
                 print(f"Redundant item '{item_name}' - discarding")
-            else:
-                inventory[item_name] = quantity
+                continue
+        try:
+            quantity = int(item_data[1])
         except ValueError as e:
-            print(f"Quantity error for '{item_name}': {e}")
+            print(f"Quantity error for '{item_data[1]}': {e}")
+            continue
+        inventory[item_name] = quantity
 
     print(f"Got inventory: {inventory}")
-    item_list = list(dict.keys(inventory))
+    item_list = list(inventory.keys())
     print(f"Item list: {item_list}")
-    item_sum = sum(dict.values(inventory))
+    item_sum = sum(inventory.values())
     print(f"Total quantity of the {len(inventory)} items: {item_sum}")
     max_value = None
     min_value = None

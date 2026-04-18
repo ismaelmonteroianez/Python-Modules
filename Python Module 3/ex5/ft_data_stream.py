@@ -4,7 +4,8 @@ import random
 
 def gen_event() -> typing.Generator[tuple[str, str], None, None]:
     names = ["ana", "bob", "charlie", "dylan"]
-    actions = ["move", "grab", "use", "run", "climb", "release", "swim", "sleep", "eat"]
+    actions = ["move", "grab", "use", "run",
+               "climb", "release", "swim", "sleep", "eat"]
     while True:
         random_name = random.choice(names)
         random_action = random.choice(actions)
@@ -12,9 +13,18 @@ def gen_event() -> typing.Generator[tuple[str, str], None, None]:
         yield (tuple_event)
 
 
-def consume_event():
-    while len(events) > 0:
-        event = random.choice
+def consume_event(
+    ten_tuple_list: list[tuple[str, str]]
+) -> typing.Generator[tuple, None, None]:
+    while len(ten_tuple_list) > 0:
+        index_in_list = random.randrange(len(ten_tuple_list))
+        event_to_remove = ten_tuple_list[index_in_list]
+        new_tuple_list = []
+        for i in range(len(ten_tuple_list)):
+            if i != index_in_list:
+                new_tuple_list += [ten_tuple_list[i]]
+        ten_tuple_list = new_tuple_list
+        yield event_to_remove  # necesito imprimir la lista restante, hago otro yield? preguntar
 
 
 def main():
@@ -27,6 +37,9 @@ def main():
         event = next(gen)
         ten_tuple_list = ten_tuple_list + [event]
     print(f"Built list of 10 events: {ten_tuple_list}")
+    for event_removed in consume_event(ten_tuple_list):
+        print(f"Got event from list: {event_removed}")
+        print(f"Remains in list: {ten_tuple_list}")
 
 
 if __name__ == "__main__":

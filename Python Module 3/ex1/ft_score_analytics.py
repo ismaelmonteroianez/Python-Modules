@@ -2,7 +2,7 @@ import sys
 
 
 def main() -> None:
-    scores = []
+    scores: list[int] = []
     print("=== Player Score Analytics ===")
     valid_arguments = False
     for i in range(1, len(sys.argv)):
