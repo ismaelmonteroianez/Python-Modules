@@ -32,7 +32,7 @@ class Plant:
     def get_height(self) -> float:
         return self._height
 
-    def set_height(self, new_height: int) -> None:
+    def set_height(self, new_height: float) -> None:
         if new_height < 0:
             print(f"{self.name}: Error, height can't be negative")
             print("Height update rejected")
@@ -46,12 +46,12 @@ class Plant:
     @classmethod
     def create_plant(cls) -> "Plant":
         print("=== Anonymous")
-        new_plant = cls("Unknown plan", 0.0, 0)
+        new_plant = cls("Unknown plant", 0.0, 0)
         return new_plant
 
     @staticmethod
     def check_age(age: int) -> None:
-        print(f"Is {age} more than a year? ->", end=" ")
+        print(f"Is {age} days more than a year? ->", end=" ")
         if age > 365:
             print("True")
         else:
@@ -102,7 +102,7 @@ class Tree(Plant):
         print(f"[asking the {self.name.lower()} to produce shade]")
         print(f"{self.__class__.__name__} {self.name} now "
               f"produces a shade of {self._height:.1f}cm long "
-              f"and {self.trunk_diameter:.1f}cm wide")
+              f"and {self.trunk_diameter:.1f}cm wide.")
         self._stats.shade_count += 1
 
     class _Statistics(Plant._Statistics):
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     plant3.show()
     print(f"[make {plant3.name.lower()} grow, age and bloom]")
     plant3.advance_age(20)
-    plant3.grow(1.5)
+    plant3.grow(30)
     plant3.bloom()
     plant3.produce_seeds()
     plant3.show()

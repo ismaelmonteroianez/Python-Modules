@@ -26,4 +26,4 @@ if __name__ == "__main__":
         plant1.advance_age()
         plant1.grow()
     final_height = plant1.height - height
-    print(f"Growth this week: {round(final_height)}cm")
+    print(f"Growth this week: {round(final_height, 1)}cm")

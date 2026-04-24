@@ -29,7 +29,7 @@ class Plant:
     def get_height(self) -> float:
         return self._height
 
-    def set_height(self, new_height: int) -> None:
+    def set_height(self, new_height: float) -> None:
         if new_height < 0:
             print(f"{self.name}: Error, height can't be negative")
             print("Height update rejected")
@@ -71,7 +71,7 @@ class Tree(Plant):
     def produce_shade(self) -> None:
         print(f"[asking the {self.name} to produce shade]")
         print(f"{self.__class__.__name__} {self.name} now produces a"
-              f"shade of {self._height:.1f}cm long "
+              f" shade of {self._height:.1f}cm long "
               f"and {self.trunk_diameter:.1f}cm wide")
 
 
