@@ -1,7 +1,7 @@
 def input_temperature(temp_str: str) -> int:
-    if int(temp_str) <= 0:
+    if int(temp_str) < 0:
         raise ValueError(f"{temp_str}°C is too cold for plants (min 0°C)")
-    elif int(temp_str) >= 40:
+    elif int(temp_str) > 40:
         raise ValueError(f"{temp_str}°C is too hot for plants (max 40°C)")
     else:
         return int(temp_str)
