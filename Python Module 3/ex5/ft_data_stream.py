@@ -15,21 +15,16 @@ def gen_event() -> typing.Generator[tuple[str, str], None, None]:
 
 def consume_event(
     ten_tuple_list: list[tuple[str, str]]
-) -> typing.Generator[tuple, None, None]:
+) -> typing.Generator[tuple[str, str], None, None]:
     while len(ten_tuple_list) > 0:
         index_in_list = random.randrange(len(ten_tuple_list))
-        event_to_remove = ten_tuple_list[index_in_list]
-        new_tuple_list = []
-        for i in range(len(ten_tuple_list)):
-            if i != index_in_list:
-                new_tuple_list += [ten_tuple_list[i]]
-        ten_tuple_list = new_tuple_list
-        yield event_to_remove  # necesito imprimir la lista restante, hago otro yield? preguntar
+        event_to_remove = ten_tuple_list.pop(index_in_list)
+        yield event_to_remove 
 
 
-def main():
+def main() -> None:
     gen = gen_event()
-    ten_tuple_list = []
+    ten_tuple_list: list[tuple[str, str]] = []
     for i in range(0, 1000):
         event = next(gen)
         print(f"Event {i}: Player {event[0]} did action {event[1]}")

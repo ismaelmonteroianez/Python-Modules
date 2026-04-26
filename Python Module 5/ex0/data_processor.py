@@ -16,8 +16,6 @@ class DataProcessor(ABC):
         self.counter = 0
     """
     We delete de oldest element in the list with pop(0)
-    We return the quantity of elements after deleting that one
-    Plus the one deleted as str
     """
     def output(self) -> tuple[int, str]:
         if self.data == []:
