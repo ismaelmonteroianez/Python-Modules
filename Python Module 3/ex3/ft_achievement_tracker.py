@@ -54,9 +54,9 @@ def main() -> None:
     print("Alice is missing: "
           f"{achievement_list.difference(alice_achievements)}")
     print(f"Bob is missing: {achievement_list.difference(bob_achievements)}")
-    print("Charlie is missing:"
+    print("Charlie is missing: "
           f"{achievement_list.difference(charlie_achievements)}")
-    print("Dylan is missing:"
+    print("Dylan is missing: "
           f"{achievement_list.difference(dylan_achievements)}")
 
 

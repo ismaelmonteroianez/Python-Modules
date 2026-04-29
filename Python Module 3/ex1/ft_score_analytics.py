@@ -14,7 +14,7 @@ def main() -> None:
             print(f"Invalid parameter: '{sys.argv[i]}'")
     if not valid_arguments:
         print("No scores provided."
-              "Usage: python3 ft_score_analytics.py <score1> <score2> ...")
+              " Usage: python3 ft_score_analytics.py <score1> <score2> ...")
         return
     print(f"Scores processed: {scores}")
     total_players = len(scores)

@@ -18,6 +18,10 @@ def main() -> None:
         except ValueError as e:
             print(f"Quantity error for '{item_data[1]}': {e}")
             continue
+        if quantity < 0:
+            print(f"Quantity error for '{item_name}': "
+                  "negative value not allowed")
+            continue
         inventory[item_name] = quantity
 
     print(f"Got inventory: {inventory}")

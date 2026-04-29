@@ -19,7 +19,7 @@ def consume_event(
     while len(ten_tuple_list) > 0:
         index_in_list = random.randrange(len(ten_tuple_list))
         event_to_remove = ten_tuple_list.pop(index_in_list)
-        yield event_to_remove 
+        yield event_to_remove
 
 
 def main() -> None:
@@ -30,7 +30,7 @@ def main() -> None:
         print(f"Event {i}: Player {event[0]} did action {event[1]}")
     for i in range(10):
         event = next(gen)
-        ten_tuple_list = ten_tuple_list + [event]
+        ten_tuple_list.append(event)
     print(f"Built list of 10 events: {ten_tuple_list}")
     for event_removed in consume_event(ten_tuple_list):
         print(f"Got event from list: {event_removed}")
