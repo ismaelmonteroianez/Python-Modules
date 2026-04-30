@@ -1,5 +1,4 @@
-# from .dark_spellbook import Ismael
-# from .dark_validator import Manuel
+from .light_spellbook import light_spell_record
 
 
-# __all__ = ["Ismael", "Manuel"]
+__all__ = ["light_spell_record"]
