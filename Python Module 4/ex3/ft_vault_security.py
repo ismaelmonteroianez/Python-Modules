@@ -24,8 +24,8 @@ if __name__ == "__main__":
     result = secure_archive(file, "r", "")
     print(result)
     print()
-    print("Using 'secure_archive' to read from a regular file:")
-    file = "/etc/master.passwd"
+    print("Using 'secure_archive' to read from  an inaccessibe file:")
+    file = "etc/master.passwd"
     result = secure_archive(file, "r", "")
     print(result)
     print()
@@ -36,3 +36,4 @@ if __name__ == "__main__":
     print()
     print("Using 'secure_archive' to write previous content to a new file:")
     result = secure_archive(file, "w", "This is a test in the archives")
+    print(result)

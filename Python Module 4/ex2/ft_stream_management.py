@@ -4,7 +4,7 @@ import typing
 
 def main() -> None:
     if len(sys.argv) != 2:
-        print("Usage: ft_ancient_text.py <file>")
+        print("Usage: ft_stream_management.py <file>")
         return
     archive: str = sys.argv[1]
     print("=== Cyber Archives Recovery ===")

@@ -4,7 +4,7 @@ import typing
 
 def main() -> None:
     if len(sys.argv) != 2:
-        print("Usage: ft_ancient_text.py <file>")
+        print("Usage: ft_archive_creation.py <file>")
         return
     archive: str = sys.argv[1]
     print("=== Cyber Archives Recovery ===")
@@ -35,15 +35,17 @@ def main() -> None:
         if new_archive == "":
             print("Not saving data.")
         else:
-            print(f"Saving data to {new_archive}")
+            print(f"Saving data to '{new_archive}'")
             new_file: typing.IO[str] = open(new_archive, "w")
             new_file.write(new_content)
             print(f"Data saved in file '{new_archive}'.")
             new_file.close()
     except FileNotFoundError as e:
-        print(f"Error opening file '{sys.argv[1]}': {e}")
+        print(f"Error opening file '{archive}': {e}")
     except PermissionError as e:
-        print(f"Error opening file '{sys.argv[1]}': {e}")
+        print(f"Error opening file '{archive}': {e}")
+    except Exception as e:
+        print(f"Error opening file '{archive}': {e}")
 
 
 if __name__ == "__main__":
