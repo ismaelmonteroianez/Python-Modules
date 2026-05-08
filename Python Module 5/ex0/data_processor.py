@@ -40,7 +40,7 @@ class NumericProcessor(DataProcessor):
                 return True
         return False
     """
-    We use inigest to append the new data
+    We use ingest to append the new data
     to the old data, if is a list we append
     everything
     """
@@ -144,7 +144,7 @@ def main() -> None:
     print(" Extracting 1 values...")
     for x in range(1):
         test_result_5 = text_test.output()
-        print(f" Text value {x}: {test_result_5[1]}")
+        print(f" Text value {test_result_5[0]}: {test_result_5[1]}")
     print()
     print("Testing Log Processor...")
     dict_test = LogProcessor()
