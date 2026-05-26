@@ -1,6 +1,7 @@
 from ex0 import FlameFactory, AquaFactory
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
-from ex2 import NormalStrategy, AggresiveStrategy, DefensiveStrategy, CreatureError
+from ex2 import (NormalStrategy, AggresiveStrategy,
+                 DefensiveStrategy, CreatureError)
 
 
 def main() -> None:
@@ -73,6 +74,6 @@ def main() -> None:
     defensive_strategy.act(healing_creature)
     aggresive_strategy.act(transforming_creature)
 
+
 if __name__ == "__main__":
-	main()
-      
+    main()
