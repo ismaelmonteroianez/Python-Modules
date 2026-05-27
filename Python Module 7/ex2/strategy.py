@@ -27,7 +27,7 @@ class NormalStrategy(BattleStrategy):
         return True
 
 
-class AggresiveStrategy(BattleStrategy):
+class AggressiveStrategy(BattleStrategy):
     def act(self, creature: Creature) -> None:
         temp: Any = creature
         if self.is_valid(creature) is False:
