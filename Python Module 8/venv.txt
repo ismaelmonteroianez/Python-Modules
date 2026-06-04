@@ -1,0 +1,5 @@
+python3 -m venv nombre_entorno
+
+source nombre_entorno/bin/activate
+
+deactivate
