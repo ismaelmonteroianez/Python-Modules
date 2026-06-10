@@ -32,8 +32,10 @@ def main() -> None:
     print(f"Mode: {config['MATRIX_MODE'].lower()}")
     if config["MATRIX_MODE"] == "development":
         print("Database: Connected to local instance")
+        print("Debug features: Enabled")
     else:
         print("Database: Connected to production instance")
+        print("Debug features: Disabled")
 
     if config["API_KEY"]:
         print("API Access: Authenticated")
