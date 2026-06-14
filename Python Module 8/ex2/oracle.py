@@ -3,7 +3,7 @@ import sys
 from dotenv import load_dotenv
 
 
-def load_config() -> dict[str, str]:
+def load_config() -> None | dict[str, str]:
     load_dotenv()
     required_vars = ["MATRIX_MODE",
                      "DATABASE_URL",
@@ -19,7 +19,7 @@ def load_config() -> dict[str, str]:
     if missing:
         print("Missing variables:")
         print("\n".join(missing))
-        sys.exit(1)
+        return None
     config: dict[str, str] = {}
     for var in required_vars:
         config[var] = os.environ[var]
@@ -29,9 +29,12 @@ def load_config() -> dict[str, str]:
 def main() -> None:
     print("ORACLE STATUS: Reading the Matrix...")
     config = load_config()
+    if config is None:
+        sys.exit(1)
     print("Configuration loaded:")
     print(f"Mode: {config['MATRIX_MODE'].lower()}")
-    if config["MATRIX_MODE"] == "development":
+    mode = config["MATRIX_MODE"].lower()
+    if mode == "development":
         print("Database: Connected to local instance")
         print("Debug features: Enabled")
     else:
@@ -54,12 +57,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-# try:
-# 	matrix_mode = os.environ["MATRIX_MODE"]
-# 	database_url = os.environ["DATABASE_URL"]
-# 	api_key = os.environ["API_KEY"]
-# 	log_level = os.environ["LOG_LEVEL"]
-# 	zion_endpoint = os.environ["ZION_ENDPOINT"]
-# except KeyError as e:
-# 	print(f"Missing key {e}")
