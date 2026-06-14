@@ -3,13 +3,13 @@ import sys
 from dotenv import load_dotenv
 
 
-def load_config():
+def load_config() -> dict[str, str]:
     load_dotenv()
     required_vars = ["MATRIX_MODE",
-                 "DATABASE_URL",
-                 "API_KEY",
-                 "LOG_LEVEL",
-                 "ZION_ENDPOINT"]
+                     "DATABASE_URL",
+                     "API_KEY",
+                     "LOG_LEVEL",
+                     "ZION_ENDPOINT"]
     missing = []
     for var in required_vars:
         try:
@@ -24,6 +24,7 @@ def load_config():
     for var in required_vars:
         config[var] = os.environ[var]
     return config
+
 
 def main() -> None:
     print("ORACLE STATUS: Reading the Matrix...")

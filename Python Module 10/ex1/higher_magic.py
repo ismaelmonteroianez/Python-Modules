@@ -1,5 +1,6 @@
 from typing import Callable
 
+
 def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
     def combined(target, power):
         return (spell1(target, power), spell2(target, power))
@@ -8,15 +9,16 @@ def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
 
 def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
     def amplifier(target, power):
-            return base_spell(target, power * multiplier)
+        return base_spell(target, power * multiplier)
     return amplifier
+
 
 def conditional_caster(condition: Callable, spell: Callable) -> Callable:
     def conditional(target, power):
         if condition(target, power) is True:
             return spell(target, power)
         else:
-            return("Spell fizzled")
+            return ("Spell fizzled")
     return conditional
 
 
@@ -28,6 +30,7 @@ def spell_sequence(spells: list[Callable]) -> Callable:
         return spell_list
     return casts_spells
 
+
 def heal(target: str, power: int) -> str:
     return f"Heal restores {target} for {power} HP"
 
@@ -38,6 +41,7 @@ def fireball(target: str, power: int) -> str:
 
 def lightning_bolt(target: str, power: int) -> str:
     return f"Lightning strikes {target} dealing {power} damage"
+
 
 def main():
     combined = spell_combiner(fireball, lightning_bolt)
