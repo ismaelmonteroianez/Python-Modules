@@ -1,4 +1,4 @@
-from typing import Callable
+from collections.abc import Callable
 
 
 def mage_counter() -> Callable:
@@ -40,3 +40,11 @@ def memory_vault() -> dict[str, Callable]:
         else:
             return memories[key]
     return {"store": store, "recall": recall}
+
+
+def main() -> None:
+    pass
+
+
+if __name__ == "__main__":
+    main()

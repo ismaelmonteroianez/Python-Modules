@@ -132,7 +132,7 @@ def main() -> None:
                   "budget_millions": 2500
                   }
     try:
-        valid_mission = SpaceMission(**valid_data)
+        valid_mission = SpaceMission(**valid_data) # type: ignore[arg-type]
         print_mission(valid_mission)
     except ValidationError as e:
         for err in e.errors():
@@ -198,7 +198,7 @@ def main() -> None:
                     "budget_millions": 2500
                     }
     try:
-        invalid_mission = SpaceMission(**invalid_data)
+        invalid_mission = SpaceMission(**invalid_data) # type: ignore[arg-type]
         print_mission(invalid_mission)
     except ValidationError as e:
         for err in e.errors():
