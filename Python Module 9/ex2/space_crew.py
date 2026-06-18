@@ -1,7 +1,6 @@
 from enum import Enum
 from datetime import datetime
 from pydantic import BaseModel, Field, model_validator, ValidationError
-from typing_extensions import Self
 
 
 class Rank(str, Enum):
@@ -33,7 +32,7 @@ class SpaceMission(BaseModel):
     budget_millions: float = Field(ge=1.0, le=10000.0)
 
     @model_validator(mode="after")
-    def validate_mission(self) -> Self:
+    def validate_mission(self) -> "SpaceMission":
         if not self.mission_id.startswith("M"):
             raise ValueError("Mission ID must start with M")
         has_leader = False
@@ -132,7 +131,7 @@ def main() -> None:
                   "budget_millions": 2500
                   }
     try:
-        valid_mission = SpaceMission(**valid_data) # type: ignore[arg-type]
+        valid_mission = SpaceMission(**valid_data)  # type: ignore
         print_mission(valid_mission)
     except ValidationError as e:
         for err in e.errors():
@@ -198,7 +197,7 @@ def main() -> None:
                     "budget_millions": 2500
                     }
     try:
-        invalid_mission = SpaceMission(**invalid_data) # type: ignore[arg-type]
+        invalid_mission = SpaceMission(**invalid_data)  # type: ignore
         print_mission(invalid_mission)
     except ValidationError as e:
         for err in e.errors():

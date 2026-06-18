@@ -64,8 +64,16 @@ def unstable_spell():
 
 class MageGuild:
     @staticmethod
-    def validate_mage_name(name: str) -> bool
-    def cast_spell(self, spell_name: str, power: int) -> str
+    def validate_mage_name(name: str) -> bool:
+        if len(name) >= 3:
+            for character in name:
+                if not character.isalpha() and not character.isspace():
+                    return False
+            return True
+        return False
+    @power_validator(10)
+    def cast_spell(self, spell_name: str, power: int) -> str:
+        return f"Successfully cast spell_name with {power} power"
 
 
 def main() -> None:
