@@ -12,12 +12,12 @@ def mage_counter() -> Callable:
 
 
 def spell_accumulator(initial_power: int) -> Callable:
-    base_power = initial_power
+    new_power = initial_power
 
     def accumulate(amount):
-        nonlocal base_power
-        base_power += amount
-        return base_power
+        nonlocal new_power
+        new_power += amount
+        return new_power
     return accumulate
 
 
@@ -43,7 +43,35 @@ def memory_vault() -> dict[str, Callable]:
 
 
 def main() -> None:
-    pass
+    print("Testing mage counter...")
+    counter_a = mage_counter()
+    counter_b = mage_counter()
+    print(f"counter_a call 1: {counter_a()}")
+    print(f"counter_a call 2: {counter_a()}")
+    print(f"counter_b call 1: {counter_b()}")
+    print()
+    print("Testing spell accumulator...")
+    base_power = 100
+    accumulate = spell_accumulator(base_power)
+    amount = 20
+    print(f"Base: {base_power}, add {amount}: {accumulate(amount)}")
+    amount = 30
+    print(f"Base: {base_power}, add {amount}: {accumulate(amount)}")
+    print()
+    print("Testing enchantment factory...")
+    flaming_sword = enchantment_factory("Flaming")
+    print(flaming_sword("Sword"))
+    frozen_shield = enchantment_factory("Frozen")
+    print(frozen_shield("Shield"))
+    print()
+    print("Testing memory vault...")
+    vault = memory_vault()
+    store = vault["store"]
+    recall = vault["recall"]
+    store("secret", 42)
+    print("Store 'secret' = 42")
+    print(f"Recall 'secret': {recall('secret')}")
+    print(f"Recall 'unknown': {recall('unknown')}")
 
 
 if __name__ == "__main__":

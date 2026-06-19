@@ -5,14 +5,19 @@ from collections.abc import Callable
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
-    if spells == []:
+    if not spells:
         return 0
-    try:
-        op = getattr(operator, operation)
-        return reduce(op, spells)
-    except AttributeError as e:
-        print(f"Unsupported operation: {e}")
+    if operation == "add":
+        op = operator.add
+    elif operation == "multiply":
+        op = operator.mul
+    elif operation == "max":
+        op = max 
+    elif operation == "min":
+        op = min
+    else:
         return 0
+    return reduce(op, spells)
 
 
 def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
@@ -62,9 +67,25 @@ def list_dispatch(arg: list) -> str:
 
 
 def main() -> None:
-    spells = [1, 3, 5]
-    x = spell_reducer(spells, "add")
-    print(x)
+    print("Testing spell reducer...")
+    spells = [30, 40, 30]
+    sum_test = spell_reducer(spells, "add")
+    print(f"Sum: {sum_test}")
+    product_test = spell_reducer(spells, "multiply")
+    print(f"Multiplication: {product_test}")
+    max_test = spell_reducer(spells, "max")
+    print((f"Max: {max_test}"))
+    print()
+    print("Testing memoized fibonacci...")
+    print(f"Fib(0): {memoized_fibonacci(0)}")
+    print(f"Fib(1): {memoized_fibonacci(1)}")
+    print(f"Fib(10): {memoized_fibonacci(10)}")
+    print(f"Fib(15): {memoized_fibonacci(15)}")
+    print("Testing spell dispatcher...")
+    print(spell_dispatcher(42))
+    print(spell_dispatcher("fireball"))
+    print(spell_dispatcher(["fireball", "ice ray", "lightning bolt"]))
+    print(spell_dispatcher(42.42))
 
 
 if __name__ == "__main__":

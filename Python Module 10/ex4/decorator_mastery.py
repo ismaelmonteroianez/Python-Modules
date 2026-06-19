@@ -26,8 +26,7 @@ def power_validator(min_power: int) -> Callable:
     def decorator(func: Callable) -> Callable:
         @wraps(func)
         def wrapper(*args, **kwargs) -> Callable | str:
-            print("Testing power validator")
-            power = args[0]
+            power = args[-1]  # Last argument
             if power >= min_power:
                 return func(*args, **kwargs)
             return "Insufficient power for this spell"
@@ -50,10 +49,11 @@ def retry_spell(max_attempts: int) -> Callable:
                     result = func(*args, **kwargs)
                     return result
                 except Exception:
-                    print(f"Spell failed, retrying... (attempt {attempt}/{max_attempts})")
+                    print(f"Spell failed, retrying..."
+                          f" (attempt {attempt}/{max_attempts})")
                     attempt += 1
             return f"Spell casting failed after {max_attempts} attempts"
-        return wrapper 
+        return wrapper
     return decorator
 
 
@@ -71,18 +71,27 @@ class MageGuild:
                     return False
             return True
         return False
+
     @power_validator(10)
     def cast_spell(self, spell_name: str, power: int) -> str:
-        return f"Successfully cast spell_name with {power} power"
+        return f"Successfully cast {spell_name} with {power} power"
 
 
 def main() -> None:
     result = fireball()
     print(f"Result: {result}")
     print()
-    print(ice_ray(40))
+    print(ice_ray(50))
     print()
     print(unstable_spell())
+    print()
+    print("Testing MageGuild...")
+    guild = MageGuild()
+    print(MageGuild.validate_mage_name("Gandalf"))
+    print(MageGuild.validate_mage_name("A1"))
+    print(guild.cast_spell("Lightning", 15))
+    print(guild.cast_spell("Lightning", 5))
+
 
 if __name__ == "__main__":
     main()

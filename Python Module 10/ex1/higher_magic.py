@@ -43,9 +43,35 @@ def lightning_bolt(target: str, power: int) -> str:
     return f"Lightning strikes {target} dealing {power} damage"
 
 
+def enough_power(target: str, power: int) -> bool:
+    if power >= 20:
+        return True
+    else:
+        return False
+
+
 def main():
-    combined = spell_combiner(fireball, lightning_bolt)
-    print(combined("Dragon", 50))
+    print("Testing spell combiner...")
+    combined = spell_combiner(fireball, heal)
+    print(f"Combined spell result: {combined('Dragon', 50)[0]}, "
+          f"{combined('Dragon', 50)[1]}")
+    print()
+    print("Testing power amplifier...")
+    amplified = power_amplifier(fireball, 3)
+    print(f"Original: {fireball('Dragon', 10)}, "
+          f"Amplified: {amplified('Dragon', 10)}")
+    print()
+    print("Testing conditional caster...")
+    conditional = conditional_caster(enough_power, lightning_bolt)
+    print(conditional("Mage", 25))
+    print()
+    print(conditional("Mage", 10))
+    print()
+    print("Testing spell sequence...")
+    spell_barrage = spell_sequence([fireball, lightning_bolt, heal])
+    spell_list = spell_barrage("Zombie", 40)
+    for spell in spell_list:
+        print(spell)
 
 
 if __name__ == "__main__":

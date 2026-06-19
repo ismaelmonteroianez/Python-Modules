@@ -39,7 +39,7 @@ def main() -> None:
             {"name": "Darius", "power": 30, "element": "earth"},
             {"name": "Elara", "power": 85, "element": "light"}
             ]
-    spells = ["fireball", "heal", "shield", "ice spike", "lightning"]
+    spells = ["fireball", "heal", "shield", "ice ray", "lightning"]
     print("Testing artifact sorter...")
     sorted_artifacts = artifact_sorter(artifacts)
     for i in range(len(sorted_artifacts) - 1):
