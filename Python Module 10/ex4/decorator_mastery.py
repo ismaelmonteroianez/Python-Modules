@@ -1,11 +1,12 @@
 import time
 from collections.abc import Callable
 from functools import wraps
+from typing import Any
 
 
-def spell_timer(func: Callable) -> Callable:
+def spell_timer(func: Callable[..., Any]) -> Callable[..., Any]:
     @wraps(func)
-    def wrapper(*args, **kwargs) -> Callable:
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         print(f"Casting {func.__name__}...")
         start = time.perf_counter()
         result = func(*args, **kwargs)
@@ -18,14 +19,15 @@ def spell_timer(func: Callable) -> Callable:
 
 @spell_timer
 def fireball() -> str:
-    print("Testing spell timer...")
     return "Fireball cast!"
 
 
-def power_validator(min_power: int) -> Callable:
-    def decorator(func: Callable) -> Callable:
+def power_validator(min_power: int
+                    ) -> Callable[[Callable[..., Any]],
+                                  Callable[..., Any]]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
-        def wrapper(*args, **kwargs) -> Callable | str:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             power = args[-1]  # Last argument
             if power >= min_power:
                 return func(*args, **kwargs)
@@ -39,10 +41,12 @@ def ice_ray(power: int) -> str:
     return "Ice ray cast!"
 
 
-def retry_spell(max_attempts: int) -> Callable:
-    def decorator(func: Callable) -> Callable:
+def retry_spell(max_attempts: int
+                ) -> Callable[[Callable[..., Any]],
+                              Callable[..., Any]]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
-        def wrapper(*args, **kwargs) -> Callable | str:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             attempt = 1
             while attempt <= max_attempts:
                 try:
@@ -58,7 +62,7 @@ def retry_spell(max_attempts: int) -> Callable:
 
 
 @retry_spell(3)
-def unstable_spell():
+def unstable_spell() -> str:
     raise Exception()
 
 
@@ -78,6 +82,7 @@ class MageGuild:
 
 
 def main() -> None:
+    print("Testing spell timer...")
     result = fireball()
     print(f"Result: {result}")
     print()

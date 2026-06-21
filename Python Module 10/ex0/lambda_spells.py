@@ -1,20 +1,35 @@
-def artifact_sorter(artifacts: list[dict]) -> list[dict]:
+from typing import TypedDict
+
+
+class Artifact(TypedDict):
+    name: str
+    power: int
+    type: str
+
+
+class Mage(TypedDict):
+    name: str
+    power: int
+    element: str
+
+
+def artifact_sorter(artifacts: list[Artifact]) -> list[Artifact]:
     return sorted(artifacts, key=lambda artifact: artifact["power"],
                   reverse=True)
 
 
-def power_filter(mages: list[dict], min_power: int) -> list[dict]:
+def power_filter(mages: list[Mage], min_power: int) -> list[Mage]:
     return list(filter(lambda mage: mage["power"] >= min_power, mages))
 
 
 def spell_transformer(spells: list[str]) -> list[str]:
-    return list(map(lambda spell: f"*{spell}*", spells))
+    return list(map(lambda spell: f"* {spell} *", spells))
 
 
-def mage_stats(mages: list[dict]) -> dict:
+def mage_stats(mages: list[Mage]) -> dict[str, float]:
     strongest_mage = max(mages, key=lambda maxp: maxp["power"])
     max_power = strongest_mage["power"]
-    weakest_mage = strongest_mage = min(mages, key=lambda maxp: maxp["power"])
+    weakest_mage = min(mages, key=lambda maxp: maxp["power"])
     min_power = weakest_mage["power"]
     total_power = 0
     for m in mages:
@@ -25,14 +40,14 @@ def mage_stats(mages: list[dict]) -> dict:
 
 
 def main() -> None:
-    artifacts = [
+    artifacts: list[Artifact] = [
                 {"name": "Fire Staff", "power": 92, "type": "staff"},
                 {"name": "Crystal Orb", "power": 85, "type": "orb"},
                 {"name": "Shadow Dagger", "power": 78, "type": "dagger"},
                 {"name": "Storm Hammer", "power": 95, "type": "hammer"},
                 {"name": "Wind Cloak", "power": 60, "type": "cloak"}
                 ]
-    mages = [
+    mages: list[Mage] = [
             {"name": "Aeris", "power": 40, "element": "wind"},
             {"name": "Borin", "power": 95, "element": "fire"},
             {"name": "Ciri", "power": 70, "element": "ice"},
@@ -56,7 +71,6 @@ def main() -> None:
     print(" ".join(spell_transformer(spells)))
     print("\nTesting mage stats...")
     stats = mage_stats(mages)
-    print("\nTesting mage stats...")
     print(f"Max power: {stats['max_power']}")
     print(f"Min power: {stats['min_power']}")
     print(f"Avg power: {stats['avg_power']}")

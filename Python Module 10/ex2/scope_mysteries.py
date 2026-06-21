@@ -1,40 +1,46 @@
 from collections.abc import Callable
+from typing import TypedDict
 
 
-def mage_counter() -> Callable:
+def mage_counter() -> Callable[[], int]:
     x = 0
 
-    def counter():
+    def counter() -> int:
         nonlocal x
         x += 1
         return x
     return counter
 
 
-def spell_accumulator(initial_power: int) -> Callable:
+def spell_accumulator(initial_power: int) -> Callable[[int], int]:
     new_power = initial_power
 
-    def accumulate(amount):
+    def accumulate(amount: int) -> int:
         nonlocal new_power
         new_power += amount
         return new_power
     return accumulate
 
 
-def enchantment_factory(enchantment_type: str) -> Callable:
+def enchantment_factory(enchantment_type: str) -> Callable[[str], str]:
 
-    def weapon(weapon_type: str):
+    def weapon(weapon_type: str) -> str:
         return f"{enchantment_type} {weapon_type}"
     return weapon
 
 
-def memory_vault() -> dict[str, Callable]:
-    memories = {}
+class Vault(TypedDict):
+    store: Callable[[str, int | str], None]
+    recall: Callable[[str], int | str]
 
-    def store(key, value):
+
+def memory_vault() -> Vault:
+    memories: dict[str, int | str] = {}
+
+    def store(key: str, value: int | str) -> None:
         memories[key] = value
 
-    def recall(key):
+    def recall(key: str) -> int | str:
         if key not in memories:
             return "Memory not found"
         else:
