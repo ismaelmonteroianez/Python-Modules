@@ -5,6 +5,10 @@ from collections.abc import Callable
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
+    """
+    `reduce` repeatedly applies the selected operation to combine
+    all values in the list into a single result.
+    """
     if not spells:
         return 0
     if operation == "add":
@@ -22,6 +26,11 @@ def spell_reducer(spells: list[int], operation: str) -> int:
 
 def partial_enchanter(base_enchantment: Callable[[int, str, str], str]
                       ) -> dict[str, Callable[[str], str]]:
+    """
+    `partial` creates specialized versions of a function by
+    pre-filling some of its arguments while leaving the remaining
+    ones to be provided later.
+    """
     fire_enchantment = partial(base_enchantment, 50, "fire")
     ice_enchantment = partial(base_enchantment, 50, "ice")
     thunder_enchantment = partial(base_enchantment, 50, "thunder")
@@ -32,8 +41,8 @@ def partial_enchanter(base_enchantment: Callable[[int, str, str], str]
 @lru_cache
 def memoized_fibonacci(n: int) -> int:
     """
-    “Antes de ejecutar la función, compruebo si ya he calculado
-    este resultado antes con estos mismos argumentos.”
+    Before executing the function, `lru_cache` checks whether it
+    has already calculated the result for the same arguments."
     """
     if n == 0:
         return 0
@@ -43,28 +52,25 @@ def memoized_fibonacci(n: int) -> int:
         return memoized_fibonacci(n-1) + memoized_fibonacci(n-2)
 
 
-@singledispatch
-def spell_dispatcher(arg: Any) -> str:
-    """
-    singledispatch es un sistema que permite que una función
-    cambie su comportamiento según el tipo del argumento que recibe
-    """
-    return "Unknown spell type"
+def spell_dispatcher() -> Callable[[Any], str]:
 
+    @singledispatch
+    def dispatch(_: Any) -> str:
+        return "Unknown spell type"
 
-@spell_dispatcher.register(int)
-def int_dispatch(arg: int) -> str:
-    return f"Damage spell: {arg} damage"
+    @dispatch.register(int)
+    def _(arg: int) -> str:
+        return f"Damage spell: {arg} damage"
 
+    @dispatch.register(str)
+    def _(arg: str) -> str:
+        return f"Enchantment: {arg}"
 
-@spell_dispatcher.register(str)
-def str_dispatch(arg: str) -> str:
-    return f"Enchantment: {arg}"
+    @dispatch.register(list)
+    def _(arg: list[Any]) -> str:
+        return f"Multi-cast: {len(arg)} spells"
 
-
-@spell_dispatcher.register(list)
-def list_dispatch(arg: list[Any]) -> str:
-    return f"Multi-cast: {len(arg)} spells"
+    return dispatch
 
 
 def base_enchantment(power: int, element: str, target: str) -> str:
@@ -94,10 +100,11 @@ def main() -> None:
     print(f"Fib(15): {memoized_fibonacci(15)}")
     print()
     print("Testing spell dispatcher...")
-    print(spell_dispatcher(42))
-    print(spell_dispatcher("fireball"))
-    print(spell_dispatcher(["fireball", "ice ray", "lightning bolt"]))
-    print(spell_dispatcher(42.42))
+    dispatcher = spell_dispatcher()
+    print(dispatcher(42))
+    print(dispatcher("fireball"))
+    print(dispatcher(["fireball", "ice ray", "lightning bolt"]))
+    print(dispatcher(42.42))
 
 
 if __name__ == "__main__":

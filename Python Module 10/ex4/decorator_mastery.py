@@ -28,7 +28,14 @@ def power_validator(min_power: int
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
-            power = args[-1]  # Last argument
+            power = kwargs.get("power")
+            if power is None:
+                for arg in reversed(args):
+                    if isinstance(arg, (int, float)):
+                        power = arg
+                        break
+            if power is None:
+                return "Insufficient power for this spell"
             if power >= min_power:
                 return func(*args, **kwargs)
             return "Insufficient power for this spell"
@@ -37,7 +44,7 @@ def power_validator(min_power: int
 
 
 @power_validator(50)
-def ice_ray(power: int) -> str:
+def ice_ray(_power: int) -> str:
     return "Ice ray cast!"
 
 
